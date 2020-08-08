@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Camisetavio | Loja</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <%= nav_bar static: :top, brand: "Camisetavio", brand_link: root_url do %>
+  <%= form_tag busca_produto_path, method: :get, class:"navbar-form navbar-right" do %>
+  <div class="form-group">
+    <%= text_field_tag :nome, @nome_a_buscar, class:"form-control" %>
+    <%= button_to "Buscar", nil, class:"btn btn-default"%>
+  </div>
+  <% end %>
+  <% end %>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>

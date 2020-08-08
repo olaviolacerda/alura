@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aprendendo IndexedDB</title>
+</head>
+
+<body>
+<script src="js/app-es6/models/Negociacao.js"></script>
+<script src="js/app-es6/services/ConnectionFactory.js"></script>
+
+<script>
+
+
+    var connection;
+
+
+    var openRequest = window.indexedDB.open('aluraframe', 7);
+
+    openRequest.onupgradeneeded = ev => {
+        console.log('Cria ou altera um banco já existente');
+
+
+        let minhaConnection = ev.target.result;
+
+
+        if (minhaConnection.objectStoreNames.contains('negociacoes')) {
+            minhaConnection.deleteObjectStore('negociacoes');
+        }
+
+        minhaConnection.createObjectStore('negociacoes', {autoIncrement: true});
+    }
+
+    openRequest.onsuccess = ev => {
+        connection = ev.target.result;
+        console.log('Conexão obtida com sucesso');
+    }
+
+    openRequest.onerror = ev => {
+        console.log(ev.target.error);
+    }
+
+
+    function adiciona() {
+
+
+        request.onsuccess = ev => {
+            console.log('Negociacao concluida com sucesso');
+        }
+
+        request.onerror = ev => {
+            console.log('Nao foi possivel incluir a negociacao');
+        }
+    }
+
+
+    function listaTodos() {
+        let transaction = connection.transaction(['negociacoes'], 'readwrite');
+
+        let store = transaction.objectStore('negociacoes');
+
+        let cursor = store.openCursor();
+
+        let negociacoes = [];
+
+        cursor.onsuccess = ev => {
+
+            let atual = ev.target.result;
+
+            if (atual) {
+                let dado = atual.value;
+
+                negociacoes.push(new Negociacao(dado._data, dado._quantidade, dado._valor));
+
+                atual.continue();
+            } else {
+                console.log(negociacoes);
+            }
+
+        }
+
+        cursor.onerror = ev => {
+            console.log(ev.target.error.name);
+        }
+    }
+
+    // ConnectionFactory.getConnection().then(connection => {
+    //    // usa conexão
+    // });
+    //
+    // ConnectionFactory.getConnection().then(connection = > {
+    //    // usa a mesma de antes
+    // });
+
+</script>
+</body>
+</html>

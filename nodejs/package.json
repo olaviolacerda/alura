@@ -1,0 +1,24 @@
+{
+  "name": "alura-nodejs",
+  "version": "1.0.0",
+  "description": "https://cursos.alura.com.br/course/nodejs-fundamentos &amp; https://cursos.alura.com.br/course/node-mvc-autenticacao-autorizacao",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olaviolacerda/alura-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olaviolacerda/alura-nodejs/issues"
+  },
+  "homepage": "https://github.com/olaviolacerda/alura-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
